@@ -1,9 +1,6 @@
 package com.esliceu.dwes.filter;
 
-import org.springframework.context.annotation.ComponentScan;
-
 import javax.servlet.*;
-
 import java.io.IOException;
 import java.util.logging.Logger;
 
