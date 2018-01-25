@@ -19,13 +19,10 @@ public class GreetController {
     @Autowired
     private Greet greet;
 
-    @Autowired
-    private DataSource dataSource;
-
 
     @RequestMapping(path= "/greet/{name}",method= RequestMethod.GET)
     public String greet(@PathVariable String name, ModelMap model){
-        String greet =this.greet.getSay() + dataSource.toString() + " !!!" + name + " How are You?";
+        String greet =this.greet.getSay()  + " !!!" + name + " How are You?";
 
         model.addAttribute("greet", greet);
         System.out.println(greet);

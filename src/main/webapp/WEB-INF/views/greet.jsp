@@ -17,6 +17,10 @@
 <div>
     <h1>Welcome to Spring 4 and Servlet 3 Based Application</h1>
     ${greet}
+    <br/>
+    <a href="/gloses">Anar a veure les gloses</a>
+    <br/>
+    <a href="<c:url value="/gloses"/>">Gloses</a>
 </div>
 </body>
 </html>
