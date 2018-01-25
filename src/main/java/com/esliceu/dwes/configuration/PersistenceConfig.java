@@ -1,7 +1,10 @@
 package com.esliceu.dwes.configuration;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -20,7 +23,15 @@ import java.util.Properties;
  */
 @Configuration
 @EnableJpaRepositories(basePackages = "com.esliceu.dwes")
+@PropertySource("classpath:application.properties")
 public class PersistenceConfig {
+
+    @Value("${bbdd.user}")
+    private String user;
+    @Value("${bbdd.password}")
+    private String password;
+    @Value("${bbdd.url}")
+    private String url;
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
@@ -39,9 +50,9 @@ public class PersistenceConfig {
     public DataSource dataSource(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/GLOSES");
-        dataSource.setUsername( "root" );
-        dataSource.setPassword( "test" );
+        dataSource.setUrl(url);
+        dataSource.setUsername( user );
+        dataSource.setPassword( password );
         return dataSource;
     }
 
