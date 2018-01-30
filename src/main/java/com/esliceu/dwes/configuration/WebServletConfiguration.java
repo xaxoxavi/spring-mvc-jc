@@ -26,6 +26,7 @@ public class WebServletConfiguration implements WebApplicationInitializer {
         DispatcherServlet servlet = new DispatcherServlet(ac);
         ServletRegistration.Dynamic registration = servletContext.addServlet("app", servlet);
         registration.setLoadOnStartup(1);
+
         // NEVER!! https://stackoverflow.com/questions/41577234/why-does-spring-mvc-respond-with-a-404-and-report-no-mapping-found-for-http-req
         // registration.addMapping("/*");
         registration.addMapping("/");

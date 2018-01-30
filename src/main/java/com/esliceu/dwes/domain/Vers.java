@@ -15,10 +15,10 @@ import javax.persistence.*;
  ) ENGINE=InnoDB AUTO_INCREMENT=549 DEFAULT CHARSET=utf8;
  */
 @Entity(name="vers")
-public class Vers {
+public class Vers implements ParentAware<Glosa>{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="idvers")
     private Integer id;
 
@@ -27,6 +27,12 @@ public class Vers {
 
     @Column(name = "ordre")
     private Integer posicio;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "glosa_idglosa", referencedColumnName = "idglosa",
+            insertable =false)
+    private Glosa glosa;
+
 
     public Integer getId() {
         return id;
@@ -50,5 +56,19 @@ public class Vers {
 
     public void setPosicio(Integer posicio) {
         this.posicio = posicio;
+    }
+
+
+    public void setGlosa(Glosa glosa) {
+        this.glosa = glosa;
+    }
+
+    @Override
+    public void setParent(Glosa parent) {
+        setGlosa(parent);
+    }
+
+    public Glosa getGlosa() {
+        return glosa;
     }
 }
