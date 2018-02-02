@@ -1,5 +1,7 @@
 package com.esliceu.dwes.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 /**
@@ -15,7 +17,8 @@ import javax.persistence.*;
  ) ENGINE=InnoDB AUTO_INCREMENT=549 DEFAULT CHARSET=utf8;
  */
 @Entity(name="vers")
-public class Vers implements ParentAware<Glosa>{
+public class Vers {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,9 +31,8 @@ public class Vers implements ParentAware<Glosa>{
     @Column(name = "ordre")
     private Integer posicio;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "glosa_idglosa", referencedColumnName = "idglosa",
-            insertable =false)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "glosa_idglosa")
     private Glosa glosa;
 
 
@@ -61,11 +63,6 @@ public class Vers implements ParentAware<Glosa>{
 
     public void setGlosa(Glosa glosa) {
         this.glosa = glosa;
-    }
-
-    @Override
-    public void setParent(Glosa parent) {
-        setGlosa(parent);
     }
 
     public Glosa getGlosa() {

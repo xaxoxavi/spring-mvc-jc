@@ -2,12 +2,10 @@ package com.esliceu.dwes.controller;
 
 import com.esliceu.dwes.domain.Glosa;
 import com.esliceu.dwes.domain.GlosaRepository;
+import com.esliceu.dwes.domain.JdbcRespository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,9 +18,12 @@ public class GlosesController {
     @Autowired
     private GlosaRepository glosaRepository;
 
+    @Autowired
+    private JdbcRespository jdbcRespository;
+
     @RequestMapping("/gloses")
     public List<Glosa> gloses(){
-        return (List<Glosa>) glosaRepository.findAll();
+        return  jdbcRespository.findGlosa();
     }
 
 
@@ -34,6 +35,13 @@ public class GlosesController {
         glosaRepository.save(glosa);
        return ResponseEntity.ok("OK");
     }
+
+  /*  @RequestMapping("/glosa/{id}")
+    public List<Glosa> findGlosaById(Integer id){
+        return jdbcRespository.findGlosa();
+    }*/
+
+
 
 
 }

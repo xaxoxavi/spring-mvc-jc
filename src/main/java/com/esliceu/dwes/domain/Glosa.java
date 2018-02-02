@@ -56,9 +56,10 @@ public class Glosa {
     @Column(name = "titol",length = 200, nullable = false)
     private String titol;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL, mappedBy = "glosa",
-                targetEntity = Vers.class)
-    private Set versos = new ChildSet<Vers,Glosa>();
+    @OneToMany(fetch = FetchType.EAGER,
+               cascade=CascadeType.PERSIST,
+               mappedBy = "glosa")
+    private Set<Vers> versos;
 
     public Integer getId() {
         return id;
@@ -76,14 +77,12 @@ public class Glosa {
         this.titol = titol;
     }
 
+
     public Set<Vers> getVersos() {
-        if (versos instanceof ChildSet) {
-            ((ChildSet)versos).setParent(this);
-        }
         return versos;
     }
 
-    public void setVersos(ChildSet versos) {
+    public void setVersos(Set<Vers> versos) {
         this.versos = versos;
     }
 }
